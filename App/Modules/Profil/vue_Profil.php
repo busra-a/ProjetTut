@@ -5,6 +5,10 @@ class VueProfil extends VueGenerique{
 
     public function __construct(){}
 
+    public function nouvelleFormation(){
+        $this->getAffichage('Profil/nouvelleFormation.php');
+    }
+
     public function completion(){
         $this->getAffichage('Profil/completion.php');
     }
@@ -16,5 +20,4 @@ class VueProfil extends VueGenerique{
     public function suggestionsperso(){
         $this->getAffichage('Profil/suggestionsperso.php');
     }
-
 }

@@ -52,4 +52,4 @@
         </div>
     </nav>
 </header>
-<div id="bodyContent">
+<div id="bodyContent" class="container">

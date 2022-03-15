@@ -12,9 +12,8 @@ class ContProfil{
     }
 
     public function profil(){
-        $this->vue->completion();
-        $this->vue->eportfolio();
-        $this->vue->suggestionsperso();
+        $this->vue->nouvelleFormation();
+        //$this->vue->suggestionsperso();
     }
 
 }
