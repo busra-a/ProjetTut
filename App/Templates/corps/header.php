@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./Assets/css/style.css">
 </head>
 
-<body class="text-black .test">
+<body class="text-black">
 <header id="header">
 
     <nav class="navbar navbar-expand-lg border-bottom p-4">
