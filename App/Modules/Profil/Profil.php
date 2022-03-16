@@ -20,7 +20,7 @@ class Profil {
 
     public function render($toDO){
         switch ($toDO){
-            case "profilprincipal":
+            case "profil":
                 $this->controleur->profil();
                 break;
             default:
