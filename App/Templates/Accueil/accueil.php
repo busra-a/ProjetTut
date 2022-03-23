@@ -36,12 +36,6 @@ WHERE {
 
 }";
 
-//recup liste des compétences dans l'ontologie upo (portfolio)
-$sparql1 = "SELECT distinct ?competence
-WHERE {
-?competence rdf:type upo:Competence .
-
-}";
 
 $result = sparql_query($sparql);
 if( !$result ) { print sparql_errno() . ": " . sparql_error(). "\n"; exit; }
@@ -55,7 +49,7 @@ $fields = sparql_field_array( $result );
 //afficher les données dans des cartes (?)
 ?>
 <div class="p-5 border-bottom">
-    <h2 class="text-center">Découvrez nos dernières formations</h2>
+    <h2 class="text-center">Catalogue des formations</h2>
     <?php print "<p>Number of rows: ".sparql_num_rows( $result )." results.</p>"; ?>
     <!--CAROUSSEL FORMATIONS-->
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
