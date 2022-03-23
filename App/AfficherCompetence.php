@@ -10,12 +10,12 @@ sparql_ns( "owl","http://www.w3.org/2002/07/owl#" );
 sparql_ns( "rdfs","http://www.w3.org/2000/01/rdf-schema#" );
 sparql_ns( "xsd","http://www.w3.org/2001/XMLSchema#" );
 sparql_ns( "upo","http://linc.iut.univ-paris8.fr/learningCafe/UserProfile.owl#" );
-sparql_ns( "traino","http://linc.iut.univ-paris8.fr/learningCafe/Training.owl#" );
+sparql_ns( "training","http://linc.iut.univ-paris8.fr/learningCafe/Training.owl#" );
  
  
  $sparql = "SELECT distinct ?ind 
 WHERE {
-?ind rdf:type traino:Training .
+?ind rdf:type training:Training .
 
 }";
 

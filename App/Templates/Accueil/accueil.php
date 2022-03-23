@@ -9,7 +9,9 @@ sparql_ns( "rdf","http://www.w3.org/1999/02/22-rdf-syntax-ns#" );
 sparql_ns( "owl","http://www.w3.org/2002/07/owl#" );
 sparql_ns( "rdfs","http://www.w3.org/2000/01/rdf-schema#" );
 sparql_ns( "xsd","http://www.w3.org/2001/XMLSchema#" );
-sparql_ns( "upo","http://linc.iut.univ-paris8.fr/learningCafe/UserProfile.owl#" );
+//sparql_ns( "upo","http://linc.iut.univ-paris8.fr/learningCafe/UserProfile.owl#" );
+//sparql_ns( "traino","http://linc.iut.univ-paris8.fr/learningCafe/Training.owl#" );
+sparql_ns( "upo","http://linc.iut.univ-paris8.fr/learningCafe/upo.owl#" );
 sparql_ns( "traino","http://linc.iut.univ-paris8.fr/learningCafe/Training.owl#" );
 
 //liste des titres de formations, titres des lo liés à ces formations, titres des ressources pédago(cours) liés à ces lo
@@ -41,7 +43,7 @@ WHERE {
 
 }";
 
-$result = sparql_query($sparql0);
+$result = sparql_query($sparql);
 if( !$result ) { print sparql_errno() . ": " . sparql_error(). "\n"; exit; }
 
 $fields = sparql_field_array( $result );
@@ -58,17 +60,22 @@ $fields = sparql_field_array( $result );
     <!--CAROUSSEL FORMATIONS-->
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-<?php
 
-            while( $row = sparql_fetch_array( $result ) )
-            {
-                foreach( $fields as $field )
-                {
-                  print "<div class='carousel-item active'> .$row[$field]. </div>";
+            <?php
+
+            $i=0;
+            while( $row = sparql_fetch_array( $result ) ) {
+
+                foreach( $fields as $field ) {
+
+                    if($i==0){
+                        print "<div class='carousel-item active'> .$row[$field]. </div>";
+                    }
+                    print "<div class='carousel-item'> .$row[$field]. </div>";
+                    $i++;
                 }
             }
-
-?>
+            ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
