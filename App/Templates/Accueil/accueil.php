@@ -60,12 +60,16 @@ $fields = sparql_field_array( $result );
             $i=0;
             while( $row = sparql_fetch_array( $result ) ) {
 
-                foreach( $fields as $field ) {
+                foreach( $row as $field ) {
 
-                    if($i==0){
-                        print "<div class='carousel-item active'> .$row[$field]. </div>";
-                    }
-                    print "<div class='carousel-item'> .$row[$field]. </div>";
+                    if($i==0){ ?>
+
+                        <div class='carousel-item active'> <?php print_r((explode('#', $field))[1]) ?> </div>
+
+                    <?php } ?>
+
+                    <div class='carousel-item'> <?php print_r((explode('#', $field))[1]) ?> </div>
+                    <?php
                     $i++;
                 }
             }
