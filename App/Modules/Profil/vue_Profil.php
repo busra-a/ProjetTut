@@ -17,7 +17,4 @@ class VueProfil extends VueGenerique{
         $this->getAffichage('Profil/e-portfolio.php');
     }
 
-    public function suggestionsperso(){
-        $this->getAffichage('Profil/suggestionsperso.php');
-    }
 }

@@ -13,8 +13,8 @@
                 <div class='row justify-content-around align-items-center'>
                     <div class=''>
                         <div class='form-floating mb-3'>
-                            <input name='pseudo' type='text' class='form-control' id='pseudo' placeholder='Pseudo'>
-                            <label for='pseudo'>Pseudo</label>
+                            <input name='mail' type='email' class='form-control' id='mail' placeholder='Mail'>
+                            <label for='mail'>Mail</label>
                         </div>
                         <div class='form-floating mb-3'>
                             <input name='password' type='password' class='form-control' id='floatingPassword' placeholder='Mot de passe'>

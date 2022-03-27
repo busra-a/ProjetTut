@@ -42,10 +42,6 @@ if( !$result ) { print sparql_errno() . ": " . sparql_error(). "\n"; exit; }
 
 $fields = sparql_field_array( $result );
 
-//print "<p>Number of rows: ".sparql_num_rows( $result )." results.</p>";
-//print "<table class='example_table'>";
-//print "<tr>";
-
 //afficher les données dans des cartes (?)
 ?>
 <div class="p-5 border-bottom">
