@@ -1,31 +1,60 @@
 
 <div class="border-top container py-4">
-    <h4>Compléter mon profil</h4>
+    <h4>Mes informations</h4>
 
     <!--collecter les informations manquantes dans le profil de l'utilisateur SESSION
     faire un if à chaque fois
     on remplit le conteneur si l'info a déjà été donnée par l'utilisateur-->
-    <form class="py-4">
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
 
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
+    <?php
 
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Choix du format des cours
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li><button class="dropdown-item" type="button">Vidéo</button></li>
-                <li><button class="dropdown-item" type="button">Textuel</button></li>
-            </ul>
-        </div>
-    </form>
+    require_once("sparqllib.php");
+
+    $db = sparql_connect("http://localhost:3030/TrainingUpoGlobal/sparql");
+
+    if (!$db) {
+        print sparql_errno() . ": " . sparql_error() . "\n";
+        exit;
+    }
+
+    sparql_ns("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+    sparql_ns("owl", "http://www.w3.org/2002/07/owl#");
+    sparql_ns("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
+    sparql_ns("xsd", "http://www.w3.org/2001/XMLSchema#");
+    sparql_ns("upo", "http://linc.iut.univ-paris8.fr/learningCafe/UserProfile.owl#");
+    sparql_ns("traino", "http://linc.iut.univ-paris8.fr/learningCafe/Training.owl#");
+    sparql_ns("UserProfile", "http://linc.iut.univ-paris8.fr/learningCafe/UserProfile.owl#");
+
+    $var="Adil";
+    $sparql = "SELECT distinct ?email ?firstname ?lastname 
+WHERE {
+?ind rdf:type UserProfile:Learner .
+  ?ind UserProfile:hasTraining ?HasT .
+  ?ind UserProfile:firstname '{$var}' ^^xsd:string .
+  ?ind UserProfile:firstname ?firstname .
+?ind UserProfile:lastname ?lastname .
+?ind UserProfile:email ?email .
+
+}";
+
+    $result = sparql_query( $sparql );
+    if( !$result ) { print sparql_errno() . ": " . sparql_error(). "\n"; exit; }
+
+    $fields = sparql_field_array( $result );
+
+    print "<table class='example_table'>";
+    while( $row = sparql_fetch_array( $result ) )
+    {
+        print "<tr>";
+        foreach( $fields as $field )
+        {
+            print "<td>$row[$field]       </td>";
+        }
+        print "</tr>";
+    }
+    print "</table>";
+
+    ?>
 
 </div>
 

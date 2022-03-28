@@ -1,15 +1,12 @@
 <?php
 require_once "./Modules/Authentification/vue_Authentification.php";
-require_once "./Modules/Authentification/modele_Authentification.php";
 require_once "./Modules/Profil/cont_Profil.php";
-
 
 class ContAuthentification{
     private $modele;
     private $vue;
 
     public function __construct(){
-        $this->modele = new ModeleAuthentification();
         $this->vue = new VueAuthentification();
         $this->controleurProfil = new VueProfil();
     }
@@ -19,7 +16,7 @@ class ContAuthentification{
     }
 
     public function connexionform(){
-        if ( !isset($_POST['pseudo']) or !isset($_POST['password']) or  empty($_POST['pseudo']) or empty($_POST['password'])) {
+        if ( !isset($_POST['mail']) or !isset($_POST['password']) or  empty($_POST['mail']) or empty($_POST['password'])) {
             $_SESSION["erreur"] = "Tous les champs doivent être remplis !";
             if(!headers_sent() and isset($_SERVEUR['HTTP_REFERER']) and !empty($_SERVEUR['HTTP_REFERER'])){
                 header("Location: ".$_SERVEUR['HTTP_REFERER']);
@@ -28,9 +25,8 @@ class ContAuthentification{
                 header("Location: index.php?module=Authentification&action=connexioninscription");
             }
         } else {
-            $pseudo =htmlspecialchars($_POST['pseudo']);
+            $mail = htmlspecialchars($_POST['mail']);
             $password = htmlspecialchars($_POST['password']);
-            $user = $this->modele->getUser($pseudo);
 
             if(empty($user)){
                 $_SESSION["erreur"] = "Ce pseudo n'existe pas !";
@@ -45,7 +41,7 @@ class ContAuthentification{
                 if($verifPassword){
                     if(session_status()== PHP_SESSION_DISABLED)
                         session_start();
-                    $_SESSION['pseudo'] = $pseudo;
+                    $_SESSION['mail'] = $mail;
                     $_SESSION['id']=$id;
                     $this->controleurProfil->profil();
                 } else{
@@ -79,11 +75,9 @@ class ContAuthentification{
             $email = htmlspecialchars($_POST['email']);
             $pseudo =htmlspecialchars( $_POST['pseudo']);
             $password =htmlspecialchars($_POST['password']);
-            $user = $this->modele->getUser($pseudo);
             if(empty($user)){
                 $password = password_hash($password,PASSWORD_BCRYPT);
                 $data = array('nom'=>$nom,'prenom'=>$prenom,'pseudo'=>$pseudo,'email'=>$email,'password'=>$password);
-                $this->modele->createUser($data);
                 $this->controleurProfil->profil();
             } else {
                 $_SESSION["erreur"] = "L'email ou le pseudo entré est déja utilisé";
