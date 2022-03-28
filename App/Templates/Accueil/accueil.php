@@ -44,7 +44,7 @@ $fields = sparql_field_array( $result );
 
 //afficher les données dans des cartes (?)
 ?>
-<div class="p-5 border-bottom">
+<div class="p-5">
     <h2 class="text-center">Catalogue des formations</h2>
             <?php
 
