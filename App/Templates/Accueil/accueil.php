@@ -46,39 +46,25 @@ $fields = sparql_field_array( $result );
 ?>
 <div class="p-5 border-bottom">
     <h2 class="text-center">Catalogue des formations</h2>
-    <?php print "<p>Number of rows: ".sparql_num_rows( $result )." results.</p>"; ?>
-    <!--CAROUSSEL FORMATIONS-->
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-
             <?php
 
-            $i=0;
+            print("<div class='row'>");
             while( $row = sparql_fetch_array( $result ) ) {
 
-                foreach( $row as $field ) {
+                foreach( $fields as $field ) {?>
 
-                    if($i==0){ ?>
-
-                        <div class='carousel-item active'> <?php print_r((explode('#', $field))[1]) ?> </div>
-
-                    <?php } ?>
-
-                    <div class='carousel-item'> <?php print_r((explode('#', $field))[1]) ?> </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><?php print_r((explode('#', $row[$field]))[1]) ?></h5>
+            </div>
+        </div>
+    </div>
                     <?php
-                    $i++;
                 }
             }
+
             ?>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+</div>
 </div>
 
